@@ -28,12 +28,13 @@ const LazyImage: React.FC<Props> = ({
   as
 }) => {
   const [isDisplay, setIsDisplay] = useState<boolean>(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const [divWidth, divHeight] = useMemo<[string, string]>(() => ([
     staticWidth ? (typeof staticWidth === 'number' ? `${staticWidth}px` : staticWidth) : '',
     staticHeight ? typeof staticHeight === 'number' ? `${staticHeight}px` : staticHeight : ''
   ]), [staticWidth, staticHeight]);
 
-  const containerRef = useRef<HTMLDivElement>(null);
   const distanceCss = useMemo(() => {
     if(typeof distance === 'number') {
       return `${distance}px`
@@ -43,14 +44,24 @@ const LazyImage: React.FC<Props> = ({
     }
     return distance
   }, [distance]);
+
   const observable = useMemo<IntersectionObservable>(() => {
-    console.log(distanceCss)
     return new IntersectionObservable({
       root: baseElement,
       rootMargin: distanceCss,
       threshold: 0.0
     })
   }, [baseElement, distanceCss]);
+
+  const defaultView = useMemo(() => {
+    if(children) {
+      return children;
+    }
+    if(divWidth || divHeight) {
+      return <ShapeDiv width={divWidth} height={divHeight} />;
+    }
+    return null;
+  }, [children, divWidth, divHeight])
 
   useLayoutEffect(() => {
     if(containerRef.current) {
@@ -71,10 +82,7 @@ const LazyImage: React.FC<Props> = ({
     <Container ref={containerRef} as={as ?? 'div'}>
       {isDisplay 
         ? <img src={src} title={title} alt={alt} />
-        : children 
-          ?? (!!divWidth || !!divHeight)
-            ? <ShapeDiv width={divWidth} height={divHeight} />
-            : null
+        : defaultView
       }
     </Container>
   )
