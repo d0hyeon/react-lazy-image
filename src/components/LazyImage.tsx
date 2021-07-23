@@ -19,11 +19,11 @@ interface Props {
 const LazyImage: React.FC<Props> = ({
   src,
   staticWidth,
-  staticHeight = '100px',
+  staticHeight,
   alt = '', 
   title = '',
   baseElement = null,
-  distance = 0,
+  distance = '10%',
   children,
   as
 }) => {
