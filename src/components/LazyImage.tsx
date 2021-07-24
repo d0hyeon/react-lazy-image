@@ -1,20 +1,7 @@
 import React, {memo, useState, useMemo, useRef, useLayoutEffect} from 'react';
-import styled from '@emotion/styled';
-
 import IntersectionObservable from '../lib/IntersectionObservable';
-
-type RootMargin<T = string> = T | [T, T] | [T, T, T] | [T, T, T, T];
-
-interface Props {
-  src: string;
-  staticWidth?: string | number;
-  staticHeight?: string | number;
-  title?: string;
-  alt?: string;
-  baseElement?: Element;
-  distance?: RootMargin | RootMargin<number>;
-  as?: React.ElementType;
-}
+import { Props } from '../@types/index';
+import '../css/index.css'
 
 const LazyImage: React.FC<Props> = ({
   src,
@@ -25,7 +12,6 @@ const LazyImage: React.FC<Props> = ({
   baseElement = null,
   distance = '10%',
   children,
-  as
 }) => {
   const [isDisplay, setIsDisplay] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -39,6 +25,7 @@ const LazyImage: React.FC<Props> = ({
     if(typeof distance === 'number') {
       return `${distance}px`
     }
+    // @ts-ignore
     if(distance instanceof Array) {
       return distance.map((v) => typeof v === 'number' ? `${v}px` : v).join(' ')
     }
@@ -58,7 +45,7 @@ const LazyImage: React.FC<Props> = ({
       return children;
     }
     if(divWidth || divHeight) {
-      return <ShapeDiv width={divWidth} height={divHeight} />;
+      return <div style={{width: divWidth, height: divHeight}} />;
     }
     return null;
   }, [children, divWidth, divHeight])
@@ -79,25 +66,13 @@ const LazyImage: React.FC<Props> = ({
   }, [observable, containerRef, setIsDisplay])
     
   return (
-    <Container ref={containerRef} as={as ?? 'div'}>
+    <div className="container">
       {isDisplay 
         ? <img src={src} title={title} alt={alt} />
         : defaultView
       }
-    </Container>
+    </div>
   )
 }
-
-const Container = styled.div`
-  display: inline-block;
-  font-size: 0;
-`;
-
-const ShapeDiv = styled.div<{width?: string; height?: string}>`
-  ${({width, height}) => ({
-    width: width || 'auto', 
-    height: height || 'auto'
-  })}
-`;
 
 export default memo(LazyImage);
