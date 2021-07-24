@@ -2,9 +2,10 @@ import babel from '@rollup/plugin-babel';
 import typescript from 'rollup-plugin-typescript2';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import external from 'rollup-plugin-peer-deps-external';
 import { terser } from "rollup-plugin-terser";
-import postcss from 'rollup-plugin-postcss'
-import css from "rollup-plugin-import-css";
+import postcss from 'rollup-plugin-postcss';
+import autoprefixer from 'autoprefixer';
 import pkg from './package.json';
 
 
@@ -25,12 +26,19 @@ export default {
     },
   ],
   plugins: [
-    css(),
     babel({ babelHelpers: 'bundled' }),
     resolve(),
     commonjs(),
     terser(),
     typescript(),
+    external(),
+    postcss({
+      extract: false,
+      modules: true,
+      minimize: true,
+      use: ['sass'],
+      plugins: [autoprefixer()]
+    }),
   ],
   exclude: ['node_modules', 'dist']
 };
