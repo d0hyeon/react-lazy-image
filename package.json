@@ -2,7 +2,7 @@
   "name": "@odnh/react-lazy-image",
   "description": "react lazy image component",
   "keywords": [
-    "react", "component", "react component", "image", "lazy", "image lazy loading",
+    "react", "component", "react component", "image", "lazy", "image lazy loading"
   ],
   "version": "0.0.2",
   "private": false,
