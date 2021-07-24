@@ -1,7 +1,7 @@
 import React, {memo, useState, useMemo, useRef, useLayoutEffect} from 'react';
 import IntersectionObservable from '../lib/IntersectionObservable';
 import { Props } from '../@types/index';
-import '../css/index.css'
+import styles from './LazyImage.module.css';
 
 const LazyImage: React.FC<Props> = ({
   src,
@@ -66,7 +66,7 @@ const LazyImage: React.FC<Props> = ({
   }, [observable, containerRef, setIsDisplay])
     
   return (
-    <div className="container">
+    <div className={styles.container} ref={containerRef}>
       {isDisplay 
         ? <img src={src} title={title} alt={alt} />
         : defaultView
