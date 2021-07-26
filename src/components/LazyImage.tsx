@@ -11,15 +11,13 @@ const LazyImage: React.FC<Props> = ({
   const [isDisplay, setIsDisplay] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const rootElement = useMemo<HTMLElement>(() => document.body, []);
-
   const observable = useMemo<IntersectionObservable>(() => {
     return new IntersectionObservable({
-      root: rootElement,
+      root: null,
       rootMargin: distance,
       threshold: 0.0,
     });
-  }, [rootElement, distance]);
+  }, [distance]);
 
   useLayoutEffect(() => {
     if (containerRef.current) {
@@ -36,7 +34,11 @@ const LazyImage: React.FC<Props> = ({
     }
   }, [observable, containerRef, setIsDisplay]);
 
-  return <>{isDisplay ? <img src={src} {...imageAttributes} /> : children}</>;
+  return (
+    <div ref={containerRef}>
+      {isDisplay ? <img src={src} {...imageAttributes} /> : children}
+    </div>
+  );
 };
 
 export default memo(LazyImage);
