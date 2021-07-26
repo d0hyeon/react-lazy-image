@@ -20,7 +20,7 @@ function App() {
 
   return (
     <section class="app">
-      <LazyImage src={imageUrl} distance="50px 20%" title="image" alt="title" />
+      <LazyImage src={imageUrl} distance="50px 0" title="image" alt="alt" />
     </section>
   );
 }
@@ -30,5 +30,5 @@ function App() {
 
 | name                     | type                  | description                                  | default value |
 | ------------------------ | --------------------- | -------------------------------------------- | ------------- |
-| distance                 | `string` (css margin) | Adjusting the distance to enter the viewport | -             |
+| distance                 | `string` (css margin) | Adjusting the distance to enter the viewport | '10%'         |
 | {{ img tag attributes }} | `ImgHTMLAttributes`   | attribute of img tag                         | -             |
