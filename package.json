@@ -9,7 +9,7 @@
     "lazy",
     "image lazy loading"
   ],
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -25,10 +25,7 @@
     "email": "ehgus6887@gmail.com"
   },
   "scripts": {
-    "build": "rollup -c",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage --no-cache"
+    "build": "rollup -c"
   },
   "eslintConfig": {
     "extends": [
@@ -66,20 +63,9 @@
     "eslint": "^7.24.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^7.0.1",
-    "jest": "^27.0.6",
     "rollup": "^2.45.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-terser": "^7.0.2",
     "typescript": "^4.2.4"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged & yarn test:coverage"
-    }
-  },
-  "lint-staged": {
-    "*.js": "eslint --debug --fix",
-    "*.ts": "eslint --debug --fix"
   }
 }
