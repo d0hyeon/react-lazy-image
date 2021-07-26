@@ -16,14 +16,11 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "skipLibCheck": true,
-    "outDir": "dist",
     "rootDir": "src",
+    "outDir": "",
     "strict": false,
     "suppressExcessPropertyErrors": false,
-    "plugins": [
-      { "name": "typescript-plugin-css-modules" }
-    ]
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules"]
 }
