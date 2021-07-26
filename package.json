@@ -13,6 +13,17 @@
   "private": false,
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d0hyeon/react-lazy-image"
+  },
+  "bugs": {
+    "email": "ehgus6887@gmail.com"
+  },
+  "author": {
+    "name": "김도현",
+    "email": "ehgus6887@gmail.com"
+  },
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
