@@ -1,9 +1,11 @@
+.vscode/
 coverage/
 __test__/
 node_modules/
 src/ 
-src
 .babelrc
+.eslintrc.json
+.gitignore
 jest.config.ts
 rollup.config.js
 tsconfig.json
