@@ -4,7 +4,6 @@ import { Props } from "../types";
 
 const LazyImage: React.FC<Props> = ({
   src,
-  baseElement = null,
   distance = "10%",
   children,
   ...imageAttributes
@@ -12,34 +11,15 @@ const LazyImage: React.FC<Props> = ({
   const [isDisplay, setIsDisplay] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const distanceStr = useMemo(() => {
-    if (typeof distance === "number") {
-      return `${distance}px`;
-    }
-    if (distance instanceof Array) {
-      return distance
-        .map((v) => (typeof v === "number" ? `${v}px` : v))
-        .join(" ");
-    }
-    return distance;
-  }, [distance]);
-
-  const rootElement = useMemo<HTMLElement | null>(() => {
-    if (!baseElement) {
-      return null;
-    }
-    if ("current" in baseElement) {
-      return baseElement.current;
-    }
-  }, [baseElement]);
+  const rootElement = useMemo<HTMLElement>(() => document.body, []);
 
   const observable = useMemo<IntersectionObservable>(() => {
     return new IntersectionObservable({
       root: rootElement,
-      rootMargin: distanceStr,
+      rootMargin: distance,
       threshold: 0.0,
     });
-  }, [rootElement, distanceStr]);
+  }, [rootElement, distance]);
 
   useLayoutEffect(() => {
     if (containerRef.current) {
