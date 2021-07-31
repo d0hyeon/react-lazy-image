@@ -4,4 +4,5 @@ export interface Props extends ImgHTMLAttributes<HTMLImageElement> {
   src: string;
   distance?: string;
   style?: CSSProperties;
+  threshold?: number | number[];
 }
