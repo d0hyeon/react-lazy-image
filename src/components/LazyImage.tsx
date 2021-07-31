@@ -4,7 +4,7 @@ import { Props } from "../types";
 
 const LazyImage: React.FC<Props> = ({
   src,
-  distance = "10%",
+  distance,
   children,
   threshold = 0.0,
   ...imageAttributes
@@ -26,7 +26,7 @@ const LazyImage: React.FC<Props> = ({
         }, [])
         .join("");
     }
-    return "";
+    return "10%";
   }, [distance]);
 
   const observable = useMemo<IntersectionObservable>(() => {
