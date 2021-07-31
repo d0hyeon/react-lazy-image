@@ -1,8 +1,9 @@
-.vscode/
-coverage/
-__test__/
-node_modules/
-src/ 
+.husky
+.vscode
+coverage
+__test__
+node_modules
+src
 .babelrc
 .eslintrc.json
 .gitignore
