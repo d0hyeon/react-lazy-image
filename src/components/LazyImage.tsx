@@ -6,18 +6,36 @@ const LazyImage: React.FC<Props> = ({
   src,
   distance = "10%",
   children,
+  threshold,
   ...imageAttributes
 }) => {
   const [isDisplay, setIsDisplay] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const computedDistance = useMemo<string>(() => {
+    if (distance) {
+      return distance
+        .split(" ")
+        .reduce((arr, curr, idx) => {
+          if (!/\%|\px/.test(curr)) {
+            arr[idx] = `${curr}px`;
+          } else {
+            arr[idx] = curr;
+          }
+          return arr;
+        }, [])
+        .join("");
+    }
+    return "";
+  }, [distance]);
+
   const observable = useMemo<IntersectionObservable>(() => {
     return new IntersectionObservable({
       root: null,
-      rootMargin: distance,
-      threshold: 0.0,
+      rootMargin: computedDistance,
+      threshold: threshold,
     });
-  }, [distance]);
+  }, [computedDistance, threshold]);
 
   useLayoutEffect(() => {
     if (containerRef.current) {
