@@ -1,10 +1,17 @@
-type IntersectionObserverCallback = (entrey: IntersectionObserverEntry, observer: IntersectionObserver) => void;
+/* global IntersectionObserverInit */
+type IntersectionObserverCallback = (
+  entrey: IntersectionObserverEntry,
+  observer: IntersectionObserver
+) => void;
 type CollectionMap = Map<Element, IntersectionObserverCallback>;
 
 class IntersectionObservable {
   observer: null | IntersectionObserver = null;
   private collection: CollectionMap = new Map();
-  private entriesCallback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver): void => {
+  private entriesCallback = (
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver
+  ): void => {
     for (const entry of entries) {
       if (this.collection.has(entry.target)) {
         const callback = this.collection.get(entry.target);
