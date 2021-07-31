@@ -6,7 +6,7 @@ const LazyImage: React.FC<Props> = ({
   src,
   distance = "10%",
   children,
-  threshold,
+  threshold = 0.0,
   ...imageAttributes
 }) => {
   const [isDisplay, setIsDisplay] = useState<boolean>(false);
